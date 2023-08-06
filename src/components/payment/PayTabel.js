@@ -36,13 +36,13 @@ export const PayTable = () => {
             <th>#</th>
             <th>Status</th>
             <th>Title</th>
-            <th>Slug</th>
+
             <th>Added At</th>
             <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-          {payment.map(({ _id, status, title, slug, createdAt }, i) => (
+          {payment.map(({ _id, status, title, createdAt }, i) => (
             <tr key={_id}>
               <td>{i + 1}</td>
               <td>
@@ -57,13 +57,13 @@ export const PayTable = () => {
                 </span>
               </td>
               <td> {title}</td>
-              <td>{slug}</td>
+
               <td>{createdAt.slice(0, 10)}</td>
               <td>
                 <Button
                   variant="danger"
                   onClick={() =>
-                    handleOnEdit({ _id, status, title, slug, createdAt })
+                    handleOnEdit({ _id, status, title, createdAt })
                   }
                 >
                   Edit

@@ -3,7 +3,7 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const admiAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
-const payAPI = rootAPI + "/payment";
+const payAPI = rootAPI + "/paymentoptions";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -28,6 +28,16 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
 
     return data;
   } catch (error) {
+    if (
+      error?.response?.status === 403 &&
+      error?.data?.message === "jwt expired"
+    ) {
+      const { status, accessJWT } = await getNewAccessJWT();
+      if (status === "success" && accessJWT) {
+        sessionStorage.setItem("accessJWT", accessJWT);
+      }
+      return axiosProcesor({ method, url, obj, isPrivate, refreshToken });
+    }
     return {
       status: "error",
       message: error.response ? error?.response?.data?.message : error.message,
@@ -144,7 +154,7 @@ export const deletePaymentOption = (_id) => {
 
 // ==========+ get new refreshJWT
 
-export const getNewRefreshJWT = () => {
+export const getNewAccessJWT = () => {
   const obj = {
     method: "get",
     url: admiAPI + "/get-accessjwt",
