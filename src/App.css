@@ -1,0 +1,27 @@
+.main {
+  /* min-height: 83vh; */
+  background: rgba(205, 225, 255, 0.729);
+}
+
+.admin-layout {
+  display: flex;
+}
+.admin-layout .side-bar {
+  width: 230px;
+  position: fixed;
+  height: 100vh;
+}
+.admin-layout .main {
+  margin-left: 230px;
+  width: calc(100vw - 230px);
+}
+
+.page-content {
+  min-height: 83vh;
+}
+
+.sid-nav li {
+  line-height: 3rem;
+  font-weight: 600;
+  /* font-size: 1.3rem; */
+}
