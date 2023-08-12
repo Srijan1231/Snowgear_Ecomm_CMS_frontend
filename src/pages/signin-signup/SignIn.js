@@ -43,6 +43,7 @@ const SignIn = () => {
     <div>
       <Header />
       <main className="main pt-5">
+        <div>username:a@1234a.com password:password</div>
         <Form
           onSubmit={handleOnSubmit}
           className="border p-3 shadow-lg"

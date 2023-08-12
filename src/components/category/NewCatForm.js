@@ -19,7 +19,7 @@ export const NewCatForm = () => {
     <div className="border p-4 rounded shadow-lg">
       <Row>
         <Col>
-          <Form.Control placeholder="First name" ref={nameRef} />
+          <Form.Control placeholder="Electronics" ref={nameRef} />
         </Col>
         <Col className="d-grid">
           <Button variant="dark" onClick={handleOnAddCat}>

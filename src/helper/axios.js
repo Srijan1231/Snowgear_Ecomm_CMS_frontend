@@ -4,6 +4,7 @@ const rootAPI = process.env.REACT_APP_ROOTAPI;
 const admiAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
 const payAPI = rootAPI + "/paymentoptions";
+const productAPI = rootAPI + "/product";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -30,12 +31,16 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
   } catch (error) {
     if (
       error?.response?.status === 403 &&
-      error?.data?.message === "jwt expired"
+      error?.response?.data?.message === "jwt expired"
     ) {
+      //1. get new accessJWt
       const { status, accessJWT } = await getNewAccessJWT();
       if (status === "success" && accessJWT) {
         sessionStorage.setItem("accessJWT", accessJWT);
       }
+
+      //2. continue the request
+
       return axiosProcesor({ method, url, obj, isPrivate, refreshToken });
     }
     return {
@@ -172,6 +177,33 @@ export const logoutAdmin = (_id) => {
       accessJWT: getAccessJWT(),
       refreshJWT: getRefreshJWT(),
     },
+  };
+  return axiosProcesor(obj);
+};
+
+export const postNewProduct = (data) => {
+  const obj = {
+    method: "post",
+    url: productAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+export const getProduct = () => {
+  const obj = {
+    method: "get",
+    url: productAPI,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+export const deleteProduct = (_id) => {
+  const obj = {
+    method: "delete",
+    url: productAPI,
+
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
