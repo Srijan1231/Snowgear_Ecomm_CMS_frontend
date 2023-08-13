@@ -1,39 +1,79 @@
 import React, { useState } from "react";
 import { AdminLayout } from "../../components/layout/AdminLayout";
-import { Button, Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { postNewProductAction } from "./productAction";
-import { SelectCategory } from "../../components/category/SelectCategory";
 import { Link } from "react-router-dom";
+import { SelectCategory } from "../../components/category/SelectCategory";
 
 const initialState = {
   status: "inactive",
 };
-export const NewProduct = () => {
-  const dispatch = useDispatch();
 
+const NewProduct = () => {
+  const dispatch = useDispatch();
+  const [form, setForm] = useState(initialState);
+  const [imgs, setImgs] = useState([]);
   const inputs = [
-    { name: "name", label: "Name", type: "text", required: true },
-    { name: "price", label: "Price", type: "number", required: true },
-    { name: "salesPrice", label: "Sales Price", type: "text" },
-    { name: "salesStartDate", label: "Sales Start Date", type: "Date" },
-    { name: "salesEndDate", label: "Sales End Date", type: "Date" },
-    { name: "sku", label: "SKU", type: "text", required: true },
-    { name: "qty", label: "Quantity", type: "number", required: true },
+    {
+      name: "name",
+      label: "Name",
+      type: "text",
+      placeholder: "Samsung T.V.",
+      required: true,
+    },
+    {
+      name: "sku",
+      label: "SKU",
+      type: "text",
+      placeholder: "SAM-TV-8",
+      required: true,
+    },
+    {
+      name: "qty",
+      label: "QTY",
+      type: "number",
+      placeholder: "50",
+      required: true,
+    },
+    {
+      name: "price",
+      label: "PRICE",
+      type: "number",
+      placeholder: "1000",
+      required: true,
+    },
+    {
+      name: "salesPrice",
+      label: "Sales Price",
+      type: "number",
+      placeholder: "800",
+    },
+    {
+      name: "salesStartDate",
+      label: "Sales Start Date",
+      type: "Date",
+    },
+    {
+      name: "salesEndDate",
+      label: "Sales End Date",
+      type: "Date",
+    },
     {
       name: "description",
       label: "Description",
       type: "text",
       as: "textarea",
-      placeholder: "product description....",
+      placeholder: "product description ...",
+      rows: "10",
       required: true,
     },
   ];
-  const [form, setForm] = useState(initialState);
-  const [img, setImg] = useState([]);
+
   const handleOnChange = (e) => {
     let { checked, name, value } = e.target;
+
     if (name === "status") {
       value = checked ? "active" : "inactive";
     }
@@ -42,33 +82,39 @@ export const NewProduct = () => {
       [name]: value,
     });
   };
-  const handleOnImgAttached = (e) => {
+
+  const handleOnImageAtached = (e) => {
     const { files } = e.target;
-    setImg(files);
-    console.log(img);
+
+    setImgs(files);
   };
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formDt = new FormData();
+    // set all from data in FormDate
+
     for (let key in form) {
       formDt.append(key, form[key]);
     }
-    if (img.length) {
-      [...img].forEach((item) => {
-        formDt.append("image", item);
+
+    // check if there is any new image is being added
+    if (imgs.length) {
+      [...imgs].forEach((item) => {
+        formDt.append("images", item);
       });
     }
-    console.log(formDt.get);
+
     dispatch(postNewProductAction(formDt));
   };
+
   return (
     <AdminLayout title="New Product">
-      <div>
-        <Link to="/product">
-          <Button variant="dark">Goback</Button>
-        </Link>
-
-        <Form onSubmit={handleOnSubmit} encType="multipart/form-data">
+      <Link to="/product">
+        <Button variant="secondary">&lt; Back</Button>
+      </Link>
+      <div className="mt-4">
+        <Form onSubmit={handleOnSubmit}>
           <Form.Group className="mb-3">
             <Form.Check
               name="status"
@@ -83,19 +129,20 @@ export const NewProduct = () => {
             name="parentCat"
             required={true}
           />
-
           {inputs.map((item, i) => (
             <CustomInput key={i} {...item} onChange={handleOnChange} />
           ))}
-          <Form.Group className="m-3">
+
+          <Form.Group className="mb-3 mt-3">
             <Form.Control
               type="file"
               name="img"
               multiple
-              onChange={handleOnImgAttached}
+              onChange={handleOnImageAtached}
+              required={true}
             />
           </Form.Group>
-          <div className="d-grid">
+          <div className="d-grid mt-3 mb-3">
             <Button variant="success" type="submit">
               Add Product
             </Button>
@@ -105,3 +152,5 @@ export const NewProduct = () => {
     </AdminLayout>
   );
 };
+
+export default NewProduct;

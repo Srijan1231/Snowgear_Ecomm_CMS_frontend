@@ -3,7 +3,7 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const admiAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
-const payAPI = rootAPI + "/paymentoptions";
+const poAPI = rootAPI + "/payment-option";
 const productAPI = rootAPI + "/product";
 
 const getAccessJWT = () => {
@@ -90,7 +90,6 @@ export const postNewCategory = (data) => {
     method: "post",
     url: catAPI,
     obj: data,
-    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -108,7 +107,6 @@ export const updateCategory = (data) => {
     method: "put",
     url: catAPI,
     obj: data,
-    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -117,42 +115,6 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: "delete",
     url: catAPI + "/" + _id,
-    isPrivate: true,
-  };
-  return axiosProcesor(obj);
-};
-// ========= payment api
-export const postNewPaymentOption = (data) => {
-  const obj = {
-    method: "post",
-    url: payAPI,
-    obj: data,
-    isPrivate: true,
-  };
-  return axiosProcesor(obj);
-};
-export const getPaymentOptions = () => {
-  const obj = {
-    method: "get",
-    url: payAPI,
-    isPrivate: true,
-  };
-  return axiosProcesor(obj);
-};
-export const updatePaymentOption = (data) => {
-  const obj = {
-    method: "put",
-    url: payAPI,
-    obj: data,
-    isPrivate: true,
-  };
-  return axiosProcesor(obj);
-};
-export const deletePaymentOption = (_id) => {
-  const obj = {
-    method: "delete",
-    url: payAPI + "/" + _id,
-    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -181,6 +143,48 @@ export const logoutAdmin = (_id) => {
   return axiosProcesor(obj);
 };
 
+// ========== Payment Option
+
+export const postNewPO = (data) => {
+  const obj = {
+    method: "post",
+    url: poAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const getNewPOs = () => {
+  const obj = {
+    method: "get",
+    url: poAPI,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+export const updateNewPOs = (data) => {
+  const obj = {
+    method: "put",
+    url: poAPI,
+    isPrivate: true,
+    obj: data,
+  };
+  return axiosProcesor(obj);
+};
+
+export const deletePO = (_id) => {
+  const obj = {
+    method: "delete",
+    url: poAPI + "/" + _id,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
+// ========== Product
+
 export const postNewProduct = (data) => {
   const obj = {
     method: "post",
@@ -190,19 +194,30 @@ export const postNewProduct = (data) => {
   };
   return axiosProcesor(obj);
 };
-export const getProduct = () => {
+
+export const updateProduct = (data) => {
   const obj = {
-    method: "get",
+    method: "put",
     url: productAPI,
+    obj: data,
     isPrivate: true,
   };
   return axiosProcesor(obj);
 };
+
+export const getProducts = (_id) => {
+  const obj = {
+    method: "get",
+    url: _id ? productAPI + "/" + _id : productAPI,
+    isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+
 export const deleteProduct = (_id) => {
   const obj = {
     method: "delete",
-    url: productAPI,
-
+    url: productAPI + "/" + _id,
     isPrivate: true,
   };
   return axiosProcesor(obj);

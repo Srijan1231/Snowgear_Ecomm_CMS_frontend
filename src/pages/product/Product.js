@@ -9,10 +9,10 @@ const Product = () => {
     <AdminLayout title="Product">
       <div className="text-end">
         <Link to="/new-product">
-          <Button variant="primary">+Add New Product</Button>
+          <Button variant="primary"> + Add New Product</Button>
         </Link>
+        <ProductTable />
       </div>
-      <ProductTable />
     </AdminLayout>
   );
 };
