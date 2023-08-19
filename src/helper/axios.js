@@ -26,7 +26,7 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
       data: obj,
       headers,
     });
-
+    console.log(data);
     return data;
   } catch (error) {
     if (
@@ -65,6 +65,7 @@ export const postNewAdmin = (data) => {
     url: admiAPI,
     obj: data,
   };
+  console.log(obj);
   return axiosProcesor(obj);
 };
 export const signInAdmin = (data) => {
@@ -219,6 +220,15 @@ export const deleteProduct = (_id) => {
     method: "delete",
     url: productAPI + "/" + _id,
     isPrivate: true,
+  };
+  return axiosProcesor(obj);
+};
+// ============reset password request otp======
+export const requestPassOTP = (email) => {
+  const obj = {
+    method: "post",
+    url: admiAPI + "/request-otp",
+    obj: { email },
   };
   return axiosProcesor(obj);
 };

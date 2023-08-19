@@ -1,5 +1,5 @@
 .main {
-  /* min-height: 83vh; */
+  min-height: 83vh;
   background: rgba(205, 225, 255, 0.729);
 }
 
@@ -24,4 +24,13 @@
   line-height: 3rem;
   font-weight: 600;
   /* font-size: 1.3rem; */
+}
+
+.reset_password form{
+  width: 450px;
+  margin:auto;
+  box-shadow: -5px 5px 10px gray;
+  padding: 1rem;
+  border-radius: 10px;
+
 }
