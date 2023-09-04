@@ -100,6 +100,7 @@ export const postNewCategory = (data) => {
     method: "post",
     url: catAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -117,6 +118,7 @@ export const updateCategory = (data) => {
     method: "put",
     url: catAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -125,6 +127,7 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: "delete",
     url: catAPI + "/" + _id,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
