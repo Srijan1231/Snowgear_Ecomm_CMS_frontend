@@ -52,7 +52,13 @@ const SignIn = () => {
             Welcome Back
             <hr />
           </h1>
-
+          <div className=" border p-1 shadow-sm">
+            <h2>For testing </h2>
+            <p>
+              username:a@1234a.com <br />
+              password:password
+            </p>
+          </div>
           <CustomInput
             label="Email"
             name="email"

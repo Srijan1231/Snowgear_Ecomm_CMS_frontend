@@ -24,10 +24,10 @@ const NewProduct = () => {
       required: true,
     },
     {
-      name: "sku",
-      label: "SKU",
+      name: "color",
+      label: "Color",
       type: "text",
-      placeholder: "SAM-TV-8",
+      placeholder: "Black",
       required: true,
     },
     {

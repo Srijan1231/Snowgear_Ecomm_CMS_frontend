@@ -8,9 +8,14 @@ export const SelectCategory = (props) => {
     <Form.Group className="mb-3">
       <Form.Select {...props}>
         <option value="">-- select one --</option>
-        {cats.map(({ _id, title }) => (
-          <option key={_id} value={_id} selected={_id === props._id}>
-            {title}
+
+        {cats.map((item) => (
+          <option
+            key={item._id}
+            value={item._id}
+            selected={item._id === props._id}
+          >
+            {item.title}
           </option>
         ))}
       </Form.Select>
