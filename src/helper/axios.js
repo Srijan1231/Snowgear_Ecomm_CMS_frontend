@@ -29,6 +29,7 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
     console.log(data);
     return data;
   } catch (error) {
+    console.log(error.response);
     if (
       error?.response?.status === 403 &&
       error?.response?.data?.message === "jwt expired"
@@ -64,6 +65,7 @@ export const postNewAdmin = (data) => {
     method: "post",
     url: adminAPI,
     obj: data,
+    isPrivate: true,
   };
   console.log(obj);
   return axiosProcesor(obj);

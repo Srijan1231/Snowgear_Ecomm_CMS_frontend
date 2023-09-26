@@ -20,6 +20,7 @@ const SignIn = () => {
   const { admin } = useSelector((state) => state.adminInfo);
 
   const pathTo = location.state?.from?.location?.pathname || "/dashboard";
+
   useEffect(() => {
     admin?._id && navigate(pathTo);
     dispatch(autoLogin());
