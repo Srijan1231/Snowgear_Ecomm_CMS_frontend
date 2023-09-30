@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const rootAPI = process.env.REACT_APP_ROOTAPI;
-const admiAPI = rootAPI + "/admin";
+const rootAPI = process.env.REACT_APP_ROOT_API;
+const adminAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
 const poAPI = rootAPI + "/payment-option";
 const productAPI = rootAPI + "/product";
@@ -29,6 +29,7 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
     console.log(data);
     return data;
   } catch (error) {
+    console.log(error.response);
     if (
       error?.response?.status === 403 &&
       error?.response?.data?.message === "jwt expired"
@@ -54,7 +55,7 @@ const axiosProcesor = async ({ method, url, obj, isPrivate, refreshToken }) => {
 export const getAdminInfo = () => {
   const obj = {
     method: "get",
-    url: admiAPI,
+    url: adminAPI,
     isPrivate: true,
   };
   return axiosProcesor(obj);
@@ -62,8 +63,9 @@ export const getAdminInfo = () => {
 export const postNewAdmin = (data) => {
   const obj = {
     method: "post",
-    url: admiAPI,
+    url: adminAPI,
     obj: data,
+    isPrivate: true,
   };
   console.log(obj);
   return axiosProcesor(obj);
@@ -71,15 +73,24 @@ export const postNewAdmin = (data) => {
 export const signInAdmin = (data) => {
   const obj = {
     method: "post",
-    url: admiAPI + "/sign-in",
+    url: adminAPI + "/sign-in",
     obj: data,
+  };
+  return axiosProcesor(obj);
+};
+export const updateAdmin = (data) => {
+  const obj = {
+    method: "put",
+    url: adminAPI + "/update",
+    obj: data,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
 export const postNewAdminVerificationInfo = (data) => {
   const obj = {
     method: "post",
-    url: admiAPI + "/admin-verification",
+    url: adminAPI + "/admin-verification",
     obj: data,
   };
   return axiosProcesor(obj);
@@ -91,6 +102,7 @@ export const postNewCategory = (data) => {
     method: "post",
     url: catAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -108,6 +120,7 @@ export const updateCategory = (data) => {
     method: "put",
     url: catAPI,
     obj: data,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -116,6 +129,7 @@ export const deleteCategory = (_id) => {
   const obj = {
     method: "delete",
     url: catAPI + "/" + _id,
+    isPrivate: true,
   };
   return axiosProcesor(obj);
 };
@@ -125,7 +139,7 @@ export const deleteCategory = (_id) => {
 export const getNewAccessJWT = () => {
   const obj = {
     method: "get",
-    url: admiAPI + "/get-accessjwt",
+    url: adminAPI + "/get-accessjwt",
     isPrivate: true,
     refreshToken: true,
   };
@@ -134,7 +148,7 @@ export const getNewAccessJWT = () => {
 export const logoutAdmin = (_id) => {
   const obj = {
     method: "post",
-    url: admiAPI + "/logout",
+    url: adminAPI + "/logout",
     obj: {
       _id,
       accessJWT: getAccessJWT(),
@@ -227,7 +241,7 @@ export const deleteProduct = (_id) => {
 export const requestPassOTP = (email) => {
   const obj = {
     method: "post",
-    url: admiAPI + "/request-otp",
+    url: adminAPI + "/request-otp",
     obj: { email },
   };
   return axiosProcesor(obj);

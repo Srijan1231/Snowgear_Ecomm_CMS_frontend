@@ -12,7 +12,6 @@ const EditProduct = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
 
-  console.log(_id);
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
   const [imgs, setImgs] = useState([]);
@@ -50,13 +49,12 @@ const EditProduct = () => {
       disabled: true,
     },
     {
-      name: "sku",
-      label: "SKU",
+      name: "color",
+      label: "Color",
       type: "text",
-      placeholder: "SAM-TV-8",
+      placeholder: "Black",
       required: true,
-      value: form.sku,
-      disabled: true,
+      value: form.color,
     },
     {
       name: "qty",
@@ -121,7 +119,7 @@ const EditProduct = () => {
     });
   };
 
-  const handleOnImageAtached = (e) => {
+  const handleOnImageAttached = (e) => {
     const { files } = e.target;
     setImgs(files);
   };
@@ -247,7 +245,7 @@ const EditProduct = () => {
               type="file"
               name="img"
               multiple
-              onChange={handleOnImageAtached}
+              onChange={handleOnImageAttached}
             />
           </Form.Group>
           <div className="d-grid mt-3 mb-3">

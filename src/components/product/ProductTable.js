@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 export const ProductTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productInfo);
+  const { cats } = useSelector((state) => state.catInfo);
 
   useEffect(() => {
     dispatch(getProductsAction());
@@ -31,6 +32,8 @@ export const ProductTable = () => {
             <th>status</th>
             <th>Name</th>
             <th>QTY</th>
+            <th>SKU</th>
+
             <th>Edit</th>
           </tr>
         </thead>
@@ -47,12 +50,20 @@ export const ProductTable = () => {
                   width="150px"
                 />
               </td>
-              <td>{item.status}</td>
+              <td
+                className={
+                  `${item.status}` === "active" ? "text-success" : "text-danger"
+                }
+              >
+                {item.status}
+              </td>
               <td>
                 <h3> {item.name}</h3>
                 Price: {item.price}
               </td>
               <td>{item.qty}</td>
+              <td>{item.sku}</td>
+
               <td>
                 <Link to={`/product/edit/${item._id}`}>
                   <Button variant="warning">Edit</Button>
