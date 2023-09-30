@@ -40,14 +40,15 @@ export const PaymentOptionTable = () => {
             <th>#</th>
             <th>Status</th>
             <th>Title</th>
-            <th>Descripton</th>
+            <th>Description</th>
+            <th>Slug</th>
             <th>Added At</th>
             <th>Edit</th>
           </tr>
         </thead>
         <tbody>
           {paymentOptions?.map(
-            ({ _id, status, title, description, createdAt }, i) => (
+            ({ _id, status, title, description, slug, createdAt }, i) => (
               <tr key={_id}>
                 <td>{i + 1}</td>
                 <td>
@@ -63,6 +64,7 @@ export const PaymentOptionTable = () => {
                 </td>
                 <td> {title}</td>
                 <td>{description}</td>
+                <td>{slug}</td>
                 <td>{createdAt.slice(0, 10)}</td>
                 <td>
                   <Button
