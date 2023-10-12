@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useDispatch } from "react-redux";
-import { postNewCatAction } from "../../pages/category/categoryAction";
+// import { postNewCatAction } from "../../pages/category/categoryAction";
 import { CustomInput } from "../custom-input/CustomInput";
 import {
   addNewPOAction,
