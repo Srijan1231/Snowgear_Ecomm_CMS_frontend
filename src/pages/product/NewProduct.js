@@ -92,7 +92,7 @@ const NewProduct = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formDt = new FormData();
-    // set all from data in FormDate
+    // set all from data in FormData
 
     for (let key in form) {
       formDt.append(key, form[key]);
