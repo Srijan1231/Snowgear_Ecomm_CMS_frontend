@@ -1,12 +1,12 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Alert, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
-  Area,
   Bar,
   CartesianGrid,
   ComposedChart,
-  Line,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -30,33 +30,47 @@ export const Chart = () => {
   //   const options = {};
   return (
     <div>
+      <div className="d-flex justify-content-center">
+        {products.map((item) => {
+          if (item.qty < 5) {
+            return <Alert variant="danger">{item.name} is low on stock</Alert>;
+          }
+        })}
+      </div>
+
       <div className="d-flex gap-5 justify-content-center">
         <div>
           {" "}
-          <Card style={{ width: "18rem" }} className="bg-transparent">
-            <Card.Body>
-              <Card.Title as="h5">Total Category</Card.Title>
-              <Card.Text as="h5">{cats.length}</Card.Text>
-            </Card.Body>
-          </Card>
+          <Link to={"/product"}>
+            <Card style={{ width: "18rem" }} className="bg-transparent">
+              <Card.Body>
+                <Card.Title as="h5">Total No. products</Card.Title>
+                <Card.Text as="h5">{products.length}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Link>
         </div>
         <div>
           {" "}
-          <Card style={{ width: "18rem" }} className="bg-transparent">
-            <Card.Body>
-              <Card.Title as="h5">Total no. of Product</Card.Title>
-              <Card.Text as="h5">{products.length}</Card.Text>
-            </Card.Body>
-          </Card>
+          <Link to={"/category"} className="">
+            <Card style={{ width: "18rem" }} className="bg-transparent">
+              <Card.Body>
+                <Card.Title as="h5">Total Category</Card.Title>
+                <Card.Text as="h5">{cats.length}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Link>
         </div>
         <div>
           {" "}
-          <Card style={{ width: "18rem" }} className="bg-transparent">
-            <Card.Body>
-              <Card.Title as="h5">Orders</Card.Title>
-              <Card.Text as="h5">{products.length}</Card.Text>
-            </Card.Body>
-          </Card>
+          <Link to={"/order"} className="">
+            <Card style={{ width: "18rem" }} className="bg-transparent">
+              <Card.Body>
+                <Card.Title as="h5">Orders</Card.Title>
+                <Card.Text as="h5">{products.length}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Link>
         </div>
       </div>
       <div className="d-flex flex-column align-items-center">
