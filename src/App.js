@@ -11,7 +11,7 @@ import Product from "./pages/product/Product";
 import PaymentOption from "./pages/payment-option/PaymentOption";
 import Order from "./pages/order/Order";
 import AdminUser from "./pages/admin-user/AdminUser";
-import Customer from "./pages/customer/Customer";
+
 import Profile from "./pages/profile/Profile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -21,12 +21,14 @@ import NewProduct from "./pages/product/NewProduct";
 import EditProduct from "./pages/product/EditProduct";
 import { ResetPassword } from "./pages/signin-signup/ResetPassword";
 import { getProductsAction } from "./pages/product/productAction";
+import { getOrderAction } from "./pages/order/orderAction";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCatsAction());
     dispatch(getProductsAction());
+    dispatch(getOrderAction());
   }, [dispatch]);
   return (
     <div className="">
@@ -109,14 +111,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="customer"
-          element={
-            <PrivateRoute>
-              <Customer />
-            </PrivateRoute>
-          }
-        />
+
         <Route
           path="profile"
           element={

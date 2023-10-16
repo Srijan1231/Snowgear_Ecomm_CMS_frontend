@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 export const ProductTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productInfo);
-  const { cats } = useSelector((state) => state.catInfo);
 
   useEffect(() => {
     dispatch(getProductsAction());

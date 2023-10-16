@@ -43,11 +43,7 @@ export const Sidebar = () => {
               <PiVan className="fs-4" /> Order
             </Link>
           </li>
-          <li>
-            <Link className="nav-link" to="/customer">
-              <FaUsers className="fs-4" /> Customer
-            </Link>
-          </li>
+
           <li>
             <Link className="nav-link" to="/admin-user">
               <FaUserSecret className="fs-4" /> Admin User

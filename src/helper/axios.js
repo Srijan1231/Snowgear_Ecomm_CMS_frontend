@@ -5,6 +5,7 @@ const adminAPI = rootAPI + "/admin";
 const catAPI = rootAPI + "/category";
 const poAPI = rootAPI + "/payment-option";
 const productAPI = rootAPI + "/product";
+const orderAPI = rootAPI + "/order";
 
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
@@ -243,6 +244,15 @@ export const requestPassOTP = (email) => {
     method: "post",
     url: adminAPI + "/request-otp",
     obj: { email },
+  };
+  return axiosProcesor(obj);
+};
+//=============== order==========
+
+export const getOrders = (_id) => {
+  const obj = {
+    method: "get",
+    url: _id ? orderAPI + "/" + _id : orderAPI,
   };
   return axiosProcesor(obj);
 };

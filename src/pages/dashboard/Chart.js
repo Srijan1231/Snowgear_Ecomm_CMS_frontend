@@ -30,17 +30,20 @@ export const Chart = () => {
   //   const options = {};
   return (
     <div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex  justify-content-center flex-column">
         {products.map((item) => {
-          if (item.qty < 5) {
-            return <Alert variant="danger">{item.name} is low on stock</Alert>;
+          if (item.qty < 15) {
+            return (
+              <Alert key={item._id} variant="danger">
+                {item.name} is low on stock
+              </Alert>
+            );
           }
         })}
       </div>
 
       <div className="d-flex gap-5 justify-content-center">
         <div>
-          {" "}
           <Link to={"/product"}>
             <Card style={{ width: "18rem" }} className="bg-transparent">
               <Card.Body>
@@ -51,7 +54,6 @@ export const Chart = () => {
           </Link>
         </div>
         <div>
-          {" "}
           <Link to={"/category"} className="">
             <Card style={{ width: "18rem" }} className="bg-transparent">
               <Card.Body>
@@ -62,7 +64,6 @@ export const Chart = () => {
           </Link>
         </div>
         <div>
-          {" "}
           <Link to={"/order"} className="">
             <Card style={{ width: "18rem" }} className="bg-transparent">
               <Card.Body>
